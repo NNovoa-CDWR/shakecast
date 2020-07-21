@@ -327,7 +327,7 @@ def import_group_dicts(groups=None, _user=None, session=None):
                 session.add(g)
 
             g.facility_type = group.get('FACILITY_TYPE', None)
-            g.template = group.get('TEMPLATE', 'DEFAULT')
+            g.template = group['NOTIFICATION'].get('MESSAGE_FORMAT', 'DEFAULT')
             g.updated = time.time()
             if _user is not None:
                 g.updated_by = _user.username
@@ -380,7 +380,7 @@ def import_group_dicts(groups=None, _user=None, session=None):
                     spec.inspection_priority = damage_level
                             
                 spec.minimum_magnitude = group['NOTIFICATION'].get('LIMIT_VALUE', None)
-                spec.notification_format = group['NOTIFICATION'].get('MESSAGE_FORMAT', None)
+                spec.notification_format = group['NOTIFICATION'].get('NOTIFICATION_FORMAT', None)
                 spec.aggregate_group = group['NOTIFICATION'].get('AGGREGATE_GROUP', None)
                 spec.event_type = group['NOTIFICATION'].get('EVENT_TYPE', None)
     
